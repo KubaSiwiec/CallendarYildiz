@@ -81,7 +81,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RBGroupRepeat" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerRemind" />
 
             <CheckBox
                 android:id="@+id/checkBoxRepeat"
@@ -141,6 +141,29 @@
                     android:layout_height="wrap_content"
                     android:text="EveryYear" />
             </RadioGroup>
+
+            <Spinner
+                android:id="@+id/spinnerRemind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RBGroupRepeat" />
+
+            <TextView
+                android:id="@+id/textViewRemind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Remind me every:"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerRemind"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
