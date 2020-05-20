@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -59,21 +60,32 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void pickTime(View view){
-
-        final Button button = (Button) view;
-        Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = mcurrentTime.get(Calendar.MINUTE);
-        TimePickerDialog mTimePicker;
-        mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                Log.i("Time:", selectedHour + ":" + selectedMinute + " View: " + button.getTag().toString());
-            }
-        }, hour, minute, true);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
-        mTimePicker.show();
-
-    }
+//    public void pickTime(View v){
+//
+//        final Button button = (Button) v;
+//        final TextView TVfrom = (TextView) findViewById(R.id.textViewFrom);
+//        final TextView TVto = (TextView) findViewById(R.id.textViewTo);
+//
+//        Calendar mcurrentTime = Calendar.getInstance();
+//        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+//        int minute = mcurrentTime.get(Calendar.MINUTE);
+//        TimePickerDialog mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+//            @Override
+//            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+//
+//                if (button.getTag().toString().equals("from")) {
+//                    TVfrom.setText(selectedHour);
+//                    Log.i("Hm", "Selected time from"); //erase later
+//                } else if (button.getTag().toString().equals("to")) {
+//                    TVto.setText(selectedHour);
+//                    Log.i("Hmm","Selected time to");  //erase later
+//                }
+//                //erase those lines later
+//                Log.i("Time:", selectedHour + ":" + selectedMinute + " View: |" + button.getTag().toString() + "|");
+//            }
+//        }, hour, minute, true);//Yes 24 hour time
+//        mTimePicker.setTitle("Select Time");
+//        mTimePicker.show();
+//
+//    }
 }

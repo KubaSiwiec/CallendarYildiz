@@ -40,10 +40,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:onClick="pickTime"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
-                android:text="To Hour"
                 android:tag="to"
+                android:text="To Hour"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextDetails" />
 
@@ -98,7 +99,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonTimeFrom" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewFrom" />
 
             <RadioGroup
                 android:id="@+id/RBGroupRepeat"
@@ -141,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
-                android:text="What time before the start would you like to setminder?"
+                android:text="What time before the start would you like to set?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/RBGroupRepeat" />
@@ -201,6 +202,24 @@
                     android:layout_weight="1"
                     android:text="1 day" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonTimeFrom" />
+
+            <TextView
+                android:id="@+id/textViewTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonTimeTo" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
