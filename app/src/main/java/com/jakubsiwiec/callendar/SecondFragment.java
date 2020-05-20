@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -20,10 +23,34 @@ import androidx.navigation.fragment.NavHostFragment;
 
 public class SecondFragment<AddReminder> extends Fragment {
 
+    /*
+    Variables
+     */
     public TextView TVfrom;
     public TextView TVto;
+    public Button bDate;
+    public EditText editTextName;
 
-    private int startHour, startMinute, finishHour, finishMinute;
+    //define date variables and set them to -1 before user sets custom time
+    private int finishHour = -1, finishMinute = -1, evDay = -1, evMonth = -1, evYear = -1, startMinute = -1, startHour = -1;
+
+
+
+
+
+    /*
+    Functions
+     */
+
+
+    //function to check if all of the datetime variables were set by user
+    boolean checkIfDateTimeNotSet(int year, int month, int day, int startHour, int startMinute, int finishHour, int finishMinute){
+        int[] vars = new int[]{year, month, day, startHour, startMinute, finishHour, finishMinute};
+        for (int var : vars){
+            if (var == -1) return true;
+        }
+        return false;
+    }
 
     @Override
     public View onCreateView(
@@ -39,15 +66,40 @@ public class SecondFragment<AddReminder> extends Fragment {
 
         TVfrom = (TextView) view.findViewById(R.id.textViewFrom);
         TVto = (TextView) view.findViewById(R.id.textViewTo);
+        bDate = (Button) view.findViewById(R.id.buttonDate);
+        editTextName = (EditText) view.findViewById(R.id.editTextName);
 
+
+        /*
+        Save event function
+         */
         view.findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+
+                String evName = editTextName.getText().toString();
+
+                if (checkIfDateTimeNotSet(evYear, evMonth, evDay, startHour, startMinute, finishHour, finishMinute) || evName.equals("")){
+                    Toast.makeText(getContext(), "Before saving event set it's name, date, and time", Toast.LENGTH_LONG).show();
+                }
+                else{
+
+                    /*
+                    Zapis do bazy danych
+                     */
+
+                    NavHostFragment.findNavController(SecondFragment.this)
+                            .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                }
+
+
             }
         });
 
+
+        /*
+        Set start time function
+         */
         view.findViewById(R.id.buttonTimeFrom).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -61,6 +113,9 @@ public class SecondFragment<AddReminder> extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
 
+                        startHour = selectedHour;
+                        startMinute = selectedMinute;
+                        //print info under the button
                         String timeChosen = "Starts at: " + selectedHour + ":" + selectedMinute;
                         TVfrom.setText(timeChosen);
                     }
@@ -71,6 +126,9 @@ public class SecondFragment<AddReminder> extends Fragment {
             }
         });
 
+        /*
+        Set finish time function
+         */
         view.findViewById(R.id.buttonTimeTo).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -83,7 +141,10 @@ public class SecondFragment<AddReminder> extends Fragment {
                 TimePickerDialog mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
+                        //set variables to pass them to database
+                        finishHour = selectedHour;
+                        finishMinute = selectedMinute;
+                        //print time under the button
                         String timeChosen = "Finishes at: " + selectedHour + ":" + selectedMinute;
                         TVto.setText(timeChosen);
                     }
@@ -94,6 +155,9 @@ public class SecondFragment<AddReminder> extends Fragment {
             }
         });
 
+        /*
+        Set date function
+         */
         view.findViewById(R.id.buttonDate).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -107,8 +171,13 @@ public class SecondFragment<AddReminder> extends Fragment {
                 DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
-                        String dateChosen = "Starts at: " + selectedYear + ":" + selectedMonth + ":" + selectedDayOfMonth;
-                        Log.i("Date", dateChosen);
+                        //set variables to to add them to database
+                        evDay = selectedDayOfMonth;
+                        evMonth = selectedMonth;
+                        evYear = selectedYear;
+                        //print chosen date on the button
+                        String dateChosen = "Date: " + selectedYear + ":" + selectedMonth + ":" + selectedDayOfMonth;
+                        bDate.setText(dateChosen);
                     }
                 }, year, month, day);
 
