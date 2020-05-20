@@ -115,24 +115,28 @@
                     android:id="@+id/RBDaily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:text="Daily" />
 
                 <RadioButton
                     android:id="@+id/RBWeekly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:text="Weekly" />
 
                 <RadioButton
                     android:id="@+id/RBMonthly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:text="Monthly" />
 
                 <RadioButton
                     android:id="@+id/RBEveryYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:text="EveryYear" />
             </RadioGroup>
 
@@ -142,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
-                android:text="What time before the start would you like to set?"
+                android:text="What time before the start would you like to set reminder?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/RBGroupRepeat" />
