@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Calendar;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-public class SecondFragment extends Fragment {
+public class SecondFragment<AddReminder> extends Fragment {
+
+
 
     @Override
     public View onCreateView(

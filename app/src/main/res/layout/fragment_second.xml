@@ -13,7 +13,7 @@
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
@@ -28,7 +28,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:onClick="pickTime"
                 android:text="From Hour"
+                android:tag="from"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextDetails" />
 
@@ -41,6 +43,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:text="To Hour"
+                android:tag="to"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextDetails" />
 
@@ -49,12 +52,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="Event Details"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -76,22 +79,12 @@
                 android:id="@+id/button_save"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="32dp"
                 android:text="SAVE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerRemind" />
-
-            <CheckBox
-                android:id="@+id/checkBoxRepeat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="32dp"
-                android:text="Repeat"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextLocation" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
             <EditText
                 android:id="@+id/editTextLocation"
@@ -142,28 +135,72 @@
                     android:text="EveryYear" />
             </RadioGroup>
 
-            <Spinner
-                android:id="@+id/spinnerRemind"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="16dp"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RBGroupRepeat" />
-
             <TextView
                 android:id="@+id/textViewRemind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="Remind me every:"
-                app:layout_constraintBottom_toTopOf="@+id/spinnerRemind"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginTop="32dp"
+                android:gravity="center_horizontal"
+                android:text="What time before the start would you like to setminder?"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RBGroupRepeat" />
+
+            <Switch
+                android:id="@+id/switchRepeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="32dp"
+                android:text="Repeat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextLocation" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewRemind">
+
+                <CheckBox
+                    android:id="@+id/checkBox5m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="5 min" />
+
+                <CheckBox
+                    android:id="@+id/checkBox15m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="15 min" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1 hour" />
+
+                <CheckBox
+                    android:id="@+id/checkBox6h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="6 hours" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1 day" />
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
