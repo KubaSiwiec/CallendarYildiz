@@ -1,12 +1,13 @@
 package com.jakubsiwiec.callendar;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -21,6 +22,8 @@ public class SecondFragment<AddReminder> extends Fragment {
 
     public TextView TVfrom;
     public TextView TVto;
+
+    private int startHour, startMinute, finishHour, finishMinute;
 
     @Override
     public View onCreateView(
@@ -87,6 +90,30 @@ public class SecondFragment<AddReminder> extends Fragment {
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Ending Time");
                 mTimePicker.show();
+
+            }
+        });
+
+        view.findViewById(R.id.buttonDate).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Calendar mcurrentDate = Calendar.getInstance();
+                int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                int month = mcurrentDate.get(Calendar.MONTH) + 1; //for some reason Calendar.MONTH returns value from 0 to 11
+                int year = mcurrentDate.get(Calendar.YEAR);
+
+                DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
+                        String dateChosen = "Starts at: " + selectedYear + ":" + selectedMonth + ":" + selectedDayOfMonth;
+                        Log.i("Date", dateChosen);
+                    }
+                }, year, month, day);
+
+                mDatePicker.setTitle("Select Date");
+                mDatePicker.show();
 
             }
         });
