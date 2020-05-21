@@ -116,6 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:tag="1"
                     android:text="Daily" />
 
                 <RadioButton
@@ -123,6 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:tag="2"
                     android:text="Weekly" />
 
                 <RadioButton
@@ -130,6 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:tag="3"
                     android:text="Monthly" />
 
                 <RadioButton
@@ -137,6 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:tag="4"
                     android:text="EveryYear" />
             </RadioGroup>
 
