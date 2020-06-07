@@ -55,6 +55,7 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="Event Details"
+                android:maxLength="50"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -71,6 +72,7 @@
                 android:ems="10"
                 android:hint="Event Name"
                 android:inputType="textPersonName"
+                android:maxLength="28"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -96,6 +98,7 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="Location"
+                android:maxLength="28"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

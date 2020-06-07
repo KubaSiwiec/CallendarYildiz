@@ -236,8 +236,18 @@ public class SecondFragment<AddReminder> extends Fragment {
 
                         startHour = selectedHour;
                         startMinute = selectedMinute;
+
+                        String dispHour;
+                        String dispMinute;
+
+                        if (selectedHour > 9) dispHour = String.valueOf(selectedHour);
+                        else dispHour = "0" + String.valueOf(selectedHour);
+
+                        if (selectedMinute > 9) dispMinute = String.valueOf(selectedMinute);
+                        else dispMinute = "0" + String.valueOf(selectedMinute);
+
                         //print info under the button
-                        String timeChosen = "Starts at: " + selectedHour + ":" + selectedMinute;
+                        String timeChosen = "Starts at: " + dispHour + ":" + dispMinute;
                         TVfrom.setText(timeChosen);
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -265,8 +275,20 @@ public class SecondFragment<AddReminder> extends Fragment {
                         //set variables to pass them to database
                         finishHour = selectedHour;
                         finishMinute = selectedMinute;
+
+
                         //print time under the button
-                        String timeChosen = "Finishes at: " + selectedHour + ":" + selectedMinute;
+                        String dispHour;
+                        String dispMinute;
+
+                        if (selectedHour > 9) dispHour = String.valueOf(selectedHour);
+                        else dispHour = "0" + String.valueOf(selectedHour);
+
+                        if (selectedMinute > 9) dispMinute = String.valueOf(selectedMinute);
+                        else dispMinute = "0" + String.valueOf(selectedMinute);
+
+                        //print info under the button
+                        String timeChosen = "Finishes at: " + dispHour + ":" + dispMinute;
                         TVto.setText(timeChosen);
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -297,7 +319,7 @@ public class SecondFragment<AddReminder> extends Fragment {
                         evMonth = selectedMonth + 1; //for some reason Calendar.MONTH returns value from 0 to 11
                         evYear = selectedYear;
                         //print chosen date on the button
-                        String dateChosen = "Date: " + selectedYear + ":" + selectedMonth + ":" + selectedDayOfMonth;
+                        String dateChosen = "Date: " + selectedYear + ":" + evMonth + ":" + selectedDayOfMonth;
                         bDate.setText(dateChosen);
                     }
                 }, year, month, day);

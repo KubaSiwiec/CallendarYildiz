@@ -40,7 +40,19 @@ public class FirstFragment extends Fragment {
         Cursor data = dataBaseHelper.getData();
         ArrayList<String> listData = new ArrayList<>();
         while(data.moveToNext()){
-            listData.add(data.getString(1));
+            //represent date in readable format
+            String fullDate = data.getString(6);
+            String displayDate = fullDate.substring(0, 10) + " " + fullDate.substring(fullDate.length() - 4);
+
+            //trim seconds
+            String fullStartTime = data.getString(7);
+            String fullFinishTime = data.getString(8);
+
+            String dispStartTime = fullStartTime.substring(0, 5);
+            String dispFinishTime = fullFinishTime.substring(0, 5);
+
+            listData.add(data.getString(1) + ": " + data.getString(2) + "\n" + data.getString(3)
+                    + "\nDate:" + displayDate + ",   " + dispStartTime + "-" + dispFinishTime);
             Log.d(TAG, data.getString(1));
         }
 
