@@ -30,6 +30,8 @@ public class SecondFragment<AddReminder> extends Fragment {
     /*
     Variables
      */
+    private DataBaseHelper dataBaseHelper;
+
     public TextView TVfrom;
     public TextView TVto;
     public Button bDate;
@@ -73,6 +75,22 @@ public class SecondFragment<AddReminder> extends Fragment {
         return false;
     }
 
+    byte setRemindBits(boolean remind5min, boolean remind15min, boolean remind1h, boolean remind6h, boolean remind1d){
+        /*
+        The time of reminders will be passed to data base as BYTE type, with specific bits containing
+        information about single time before the event
+         */
+        byte when_to_remind = 0;
+
+        if (remind5min) when_to_remind |= 1 << 0;
+        if (remind15min) when_to_remind |= 1 << 1;
+        if (remind1h) when_to_remind |= 1 << 2;
+        if (remind6h) when_to_remind |= 1 << 3;
+        if (remind1d) when_to_remind |= 1 << 4;
+
+        return when_to_remind;
+    }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -84,6 +102,8 @@ public class SecondFragment<AddReminder> extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        dataBaseHelper = new DataBaseHelper(getContext());
 
         //View objects definition to access their properties
         TVfrom = (TextView) view.findViewById(R.id.textViewFrom);
@@ -134,9 +154,14 @@ public class SecondFragment<AddReminder> extends Fragment {
                     //how often to repeat
                     //tags: 1 for weekly, 2 for monthly, 3 for yearly
                     //iterate through radio buttons to see which one is selected
-                    Log.i("Selected", String.valueOf(rgRepeat.getCheckedRadioButtonId()));
-                    rbChecked = (RadioButton) rgRepeat.findViewById(rgRepeat.getCheckedRadioButtonId());
-                    evHowOftenRepeat = Integer.parseInt((String) rbChecked.getTag());
+                    if (evRepeat){
+                        Log.i("Selected", String.valueOf(rgRepeat.getCheckedRadioButtonId()));
+                        rbChecked = (RadioButton) rgRepeat.findViewById(rgRepeat.getCheckedRadioButtonId());
+                        evHowOftenRepeat = Integer.parseInt((String) rbChecked.getTag());
+                    }
+                    //repeat not selected
+                    else evHowOftenRepeat = 0;
+
 
                     //when to remind the user - every checkbox is treaten separately
                     //later this datastructure may be changed to array of bools
@@ -146,6 +171,10 @@ public class SecondFragment<AddReminder> extends Fragment {
                     remind6h = cb6h.isChecked();
                     remind1d = cb1d.isChecked();
 
+                    byte ev_when_to_remind = setRemindBits(remind5min, remind15min, remind1h, remind6h, remind1d);
+
+
+
                     Log.i("Name", evName);
                     Log.i("Details", evDetails);
                     Log.i("Location", evLocation);
@@ -153,6 +182,7 @@ public class SecondFragment<AddReminder> extends Fragment {
                     Log.i("Repeat", String.valueOf(evRepeat));
                     Log.i("How often to repeat", String.valueOf(evHowOftenRepeat));
                     Log.i("Remind", "5min:" + String.valueOf(remind5min) + ", 15 min:" + String.valueOf(remind15min) + ", 1h: " + String.valueOf(remind1h) + ", 6h: " + String.valueOf(remind6h) + ", 1day: " + String.valueOf(remind1d));
+                    Log.i("Remind byte form", String.valueOf(ev_when_to_remind));
 
 
                     /*
@@ -274,6 +304,7 @@ public class SecondFragment<AddReminder> extends Fragment {
                 } else {
                     for (int i = 0; i < rgRepeat.getChildCount(); i++){
                         rgRepeat.getChildAt(i).setEnabled(true);
+                        rgRepeat.setSelected(0);
                     }
                 }
 

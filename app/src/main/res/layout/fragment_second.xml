@@ -115,6 +115,7 @@
                     android:id="@+id/RBDaily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:enabled="false"
                     android:tag="1"
                     android:text="Daily" />
