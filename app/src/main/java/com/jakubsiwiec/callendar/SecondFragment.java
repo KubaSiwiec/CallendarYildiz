@@ -18,7 +18,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -53,7 +55,7 @@ public class SecondFragment<AddReminder> extends Fragment {
     private boolean evRepeat = false;
 
     //when to repeat
-    private int evHowOftenRepeat = -1;
+    private int evHowOftenRepeat = 0;
 
     //when to remind bools
     private boolean remind5min, remind15min, remind1h, remind6h, remind1d;
@@ -64,6 +66,17 @@ public class SecondFragment<AddReminder> extends Fragment {
     /*
     Functions
      */
+
+    //database insertion
+    public void addData(String name, String details, String location, boolean repeat, int how_often_to_repeat, Date date, Time start_time, Time stop_time, byte when_to_remind){
+        boolean insertData = dataBaseHelper.addData(name, details, location, repeat, how_often_to_repeat, date, start_time, stop_time, when_to_remind);
+        if(insertData){
+            Toast.makeText(getContext(), "Inserted correctly", Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(getContext(), "Wrooooong!", Toast.LENGTH_LONG).show();
+
+        }
+    }
 
 
     //function to check if all of the datetime variables were set by user
@@ -183,6 +196,8 @@ public class SecondFragment<AddReminder> extends Fragment {
                     Log.i("How often to repeat", String.valueOf(evHowOftenRepeat));
                     Log.i("Remind", "5min:" + String.valueOf(remind5min) + ", 15 min:" + String.valueOf(remind15min) + ", 1h: " + String.valueOf(remind1h) + ", 6h: " + String.valueOf(remind6h) + ", 1day: " + String.valueOf(remind1d));
                     Log.i("Remind byte form", String.valueOf(ev_when_to_remind));
+
+                    addData(evName, evDetails, evLocation, );
 
 
                     /*
