@@ -2,11 +2,13 @@ package com.jakubsiwiec.callendar;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.sql.Time;
+import java.util.Currency;
 import java.util.Date;
 
 import androidx.annotation.Nullable;
@@ -40,7 +42,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(" DROP IF TABLE EXISTS " + TABLE_NAME);
+        db.execSQL("DROP " + TABLE_NAME + " IF TABLE EXISTS");
         onCreate(db);
 
     }
@@ -70,4 +72,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
 
     }
+
+    public Cursor getData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 }
