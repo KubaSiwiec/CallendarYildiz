@@ -61,7 +61,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "add data: adding: "  + name + ", " + details + ", " + location +
                 "\nRepeat: " + repeat + ", how often repeat:" + how_often_to_repeat  +
-                "\n " + date  + ", Start: " + start_time  + ", Stop:" + stop_time + " to " + TABLE_NAME);
+                "\n " + date  + ", Start: " + start_time  + ", Stop:" + stop_time +  ", When to remind? " + when_to_remind +" to " + TABLE_NAME);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 

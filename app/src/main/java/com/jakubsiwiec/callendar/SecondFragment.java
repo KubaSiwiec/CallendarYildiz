@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -184,7 +185,11 @@ public class SecondFragment<AddReminder> extends Fragment {
                     remind6h = cb6h.isChecked();
                     remind1d = cb1d.isChecked();
 
-                    byte ev_when_to_remind = setRemindBits(remind5min, remind15min, remind1h, remind6h, remind1d);
+                    byte evWhenToRemind = setRemindBits(remind5min, remind15min, remind1h, remind6h, remind1d);
+
+                    Date evDate = new GregorianCalendar(evYear, evMonth, evDay).getTime();
+                    Time evStartTime = new Time(startHour, startMinute, 0);
+                    Time evFinishTime = new Time(finishHour, finishMinute, 0);
 
 
 
@@ -195,9 +200,9 @@ public class SecondFragment<AddReminder> extends Fragment {
                     Log.i("Repeat", String.valueOf(evRepeat));
                     Log.i("How often to repeat", String.valueOf(evHowOftenRepeat));
                     Log.i("Remind", "5min:" + String.valueOf(remind5min) + ", 15 min:" + String.valueOf(remind15min) + ", 1h: " + String.valueOf(remind1h) + ", 6h: " + String.valueOf(remind6h) + ", 1day: " + String.valueOf(remind1d));
-                    Log.i("Remind byte form", String.valueOf(ev_when_to_remind));
+                    Log.i("Remind byte form", String.valueOf(evWhenToRemind));
 
-                    addData(evName, evDetails, evLocation, );
+                    addData(evName, evDetails, evLocation, evRepeat, evHowOftenRepeat, evDate, evStartTime, evFinishTime, evWhenToRemind);
 
 
                     /*
@@ -319,7 +324,6 @@ public class SecondFragment<AddReminder> extends Fragment {
                 } else {
                     for (int i = 0; i < rgRepeat.getChildCount(); i++){
                         rgRepeat.getChildAt(i).setEnabled(true);
-                        rgRepeat.setSelected(0);
                     }
                 }
 
