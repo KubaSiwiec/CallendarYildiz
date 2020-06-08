@@ -1,5 +1,6 @@
 package com.jakubsiwiec.callendar;
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,29 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 2000; //2s for yildiz logo while startup
+    private static int sTheme;
+    public final static int THEME_DEFAULT = 0;
+    public final static int THEME_DARK= 1;
+
+    public static void changeToTheme(Activity activity, int theme)
+    {
+        sTheme = theme;
+        activity.finish();
+        activity.startActivity(new Intent(activity, activity.getClass()));
+    }
+    public static void onActivityCreateSetTheme(Activity activity)
+    {
+        switch (sTheme)
+        {
+            default:
+            case THEME_DEFAULT:
+                activity.setTheme(R.style.AppTheme);
+                break;
+            case THEME_DARK:
+                activity.setTheme(R.style.AppThemeDark);
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
