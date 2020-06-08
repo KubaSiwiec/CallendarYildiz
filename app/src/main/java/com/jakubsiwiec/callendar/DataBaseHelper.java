@@ -80,4 +80,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public void deleteEvent(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id;
+        String queryUpd = "UPDATE " + TABLE_NAME + " SET " + COL1 + " = " + COL1 + " - 1 WHERE " + COL1 + " > " + id + ";";
+        db.execSQL(query);
+        db.execSQL(queryUpd);
+    }
+
+//    public void deleteAll(){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String query = "DELETE FROM " + TABLE_NAME;
+//        db.execSQL(query);
+//    }
+
 }

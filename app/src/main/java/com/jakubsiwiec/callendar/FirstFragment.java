@@ -43,7 +43,9 @@ public class FirstFragment extends Fragment {
         Log.d(TAG, "Populate list view: displaying data in the ListView");
         Cursor data = dataBaseHelper.getData();
         ArrayList<String> listData = new ArrayList<>();
+        int i = 1;
         while(data.moveToNext()){
+
             //represent date in readable format
             String fullDate = data.getString(6);
             String displayDate = fullDate.substring(0, 10) + " " + fullDate.substring(fullDate.length() - 4);
@@ -55,9 +57,9 @@ public class FirstFragment extends Fragment {
             String dispStartTime = fullStartTime.substring(0, 5);
             String dispFinishTime = fullFinishTime.substring(0, 5);
 
-            listData.add(data.getString(0) + ". " + data.getString(1) + "\n " + data.getString(2) + ", Location: " + data.getString(3)
-                    + "\nDate:" + displayDate + ",   " + dispStartTime + "-" + dispFinishTime);
+            listData.add(i + ". " + data.getString(1));
             Log.d(TAG, data.getString(1));
+            i++;
         }
 
         Log.d(TAG, String.valueOf(data.getCount()));
@@ -69,16 +71,17 @@ public class FirstFragment extends Fragment {
 
     private AlertDialog deleteDialog(Object o){
 
-        String idAndName = o.toString();
-        int dotIndex = idAndName.indexOf(".");
-        String idText = idAndName.substring(0,dotIndex);
-        int id = Integer.parseInt(idText);
+        String posAndName = o.toString();
+        int dotIndex = posAndName.indexOf(".");
+        String posText = posAndName.substring(0,dotIndex);
+        final int eventPosition = Integer.parseInt(posText) - 1;
 
-        Cursor data = dataBaseHelper.getData();
+        Log.d("Event position", String.valueOf(eventPosition));
+        final Cursor data = dataBaseHelper.getData();
 
-        data.moveToPosition(id);
+        data.moveToPosition(eventPosition);
 
-        String eventTitle = data.getString(1);
+        String eventTitle = data.getString(2);
 
         //represent date in readable format
         String fullDate = data.getString(6);
@@ -91,7 +94,7 @@ public class FirstFragment extends Fragment {
         String dispStartTime = fullStartTime.substring(0, 5);
         String dispFinishTime = fullFinishTime.substring(0, 5);
 
-        String eventInfo = data.getString(2) + ", Location: " + data.getString(3)
+        String eventInfo = data.getString(2) + "\n\nLocation: " + data.getString(3)
                 + "\nDate:" + displayDate + ",   " + dispStartTime + "-" + dispFinishTime;
 
         AlertDialog.Builder detailsDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -105,7 +108,8 @@ public class FirstFragment extends Fragment {
         });
         detailsDialogBuilder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
+                dataBaseHelper.deleteEvent(Integer.parseInt(data.getString(0)));
+                populateListView();
             }
         });
 
@@ -129,6 +133,7 @@ public class FirstFragment extends Fragment {
 
         listViewEvents = (ListView) view.findViewById(R.id.listViewEvents);
         dataBaseHelper = new DataBaseHelper(getContext());
+
 
         populateListView();
 
