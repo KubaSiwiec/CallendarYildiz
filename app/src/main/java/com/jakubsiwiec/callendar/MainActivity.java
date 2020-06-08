@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
 import android.util.Log;
@@ -51,38 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-//    public void pickTime(View v){
-//
-//        final Button button = (Button) v;
-//        final TextView TVfrom = (TextView) findViewById(R.id.textViewFrom);
-//        final TextView TVto = (TextView) findViewById(R.id.textViewTo);
-//
-//        Calendar mcurrentTime = Calendar.getInstance();
-//        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-//        int minute = mcurrentTime.get(Calendar.MINUTE);
-//        TimePickerDialog mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-//            @Override
-//            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-//
-//                if (button.getTag().toString().equals("from")) {
-//                    TVfrom.setText(selectedHour);
-//                    Log.i("Hm", "Selected time from"); //erase later
-//                } else if (button.getTag().toString().equals("to")) {
-//                    TVto.setText(selectedHour);
-//                    Log.i("Hmm","Selected time to");  //erase later
-//                }
-//                //erase those lines later
-//                Log.i("Time:", selectedHour + ":" + selectedMinute + " View: |" + button.getTag().toString() + "|");
-//            }
-//        }, hour, minute, true);//Yes 24 hour time
-//        mTimePicker.setTitle("Select Time");
-//        mTimePicker.show();
-//
-//    }
 }
